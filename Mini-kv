@@ -1,0 +1,25 @@
+# Mini-KV Design
+
+## Goal
+
+Build a small, beginner-friendly, in-memory key-value program in C++ as a bridge from algorithm exercises to a practical command-line application.
+
+## Scope
+
+- Store string keys and string values in `std::unordered_map`.
+- Accept one command per input line: `SET key value`, `GET key`, `DEL key`, and `EXIT`.
+- Keep accepting commands until `EXIT` or end-of-file.
+- Print a clear result for successful operations and missing keys.
+- Keep the implementation in the existing `part1.cpp` file and explain it incrementally.
+
+Persistence, networking, expiration, concurrency, and multi-word values are out of scope for this first version. Values are single whitespace-free tokens so the initial parser stays focused on command flow and hash-map operations.
+
+## Design
+
+`main` owns the hash map and reads commands in a loop. Each command is handled by a small, explicit branch. `SET` inserts or replaces a value, `GET` looks up and prints a value or a not-found message, and `DEL` erases a key or reports that it was absent. Unknown commands receive an error message. The program does not save data after exit.
+
+We will build this in small steps, compiling and running a focused example after each step so the learner can connect each language feature to its behavior.
+
+## Verification
+
+Compile `part1.cpp` with the workspace C++ compiler. Run a scripted session that sets a key, reads it, deletes it, and reads it again; confirm replacement, missing-key, unknown-command, and exit behavior as those steps are added.
